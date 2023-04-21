@@ -4,8 +4,9 @@ import RouletteItem from "../ui/rouletteItem";
 const MainPage = () => {
     return (
         <div>
-          <h1>Test</h1>
+          <h1>Roulette for schoolman</h1>
             <RouletteItem/>
+
         </div>
     );
 };
