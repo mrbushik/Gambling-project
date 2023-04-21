@@ -6,68 +6,96 @@ import getRandomIntInRange from "../common/utils/getRandomIntInRange";
     const prizes = [
         {
             image: 'https://i.ibb.co/6Z6Xm9d/good-1.png',
-            text: '0'
+            text: '0',
+            type:'green'
         },
         {
             image: 'https://i.ibb.co/T1M05LR/good-2.png',
-            text: '1'
+            text: '1',
+            type:'red'
+
+
 
         },
         {
             image: 'https://i.ibb.co/Qbm8cNL/good-3.png',
-            text: '2'
+            text: '2',
+            type:'black'
 
         },
         {
             image: 'https://i.ibb.co/5Tpfs6W/good-4.png',
-            text: '3'
+            text: '3',
+                        type:'red'
 
         },
         {
             image: 'https://i.ibb.co/64k8D1c/good-5.png',
             text: '4'
+,
+            type:'black'
 
         },
         {
             image: 'https://i.ibb.co/64k8D1c/good-5.png',
-            text: '5'
+            text: '5',
+                        type:'red'
+
 
         },
         {
             image: 'https://i.ibb.co/64k8D1c/good-5.png',
             text: '6'
+,
+            type:'black'
 
         },  {
             image: 'https://i.ibb.co/64k8D1c/good-5.png',
-            text: '7'
+            text: '7',
+                        type:'red'
+
 
         },  {
             image: 'https://i.ibb.co/64k8D1c/good-5.png',
             text: '8'
+,
+            type:'black'
 
         },  {
             image: 'https://i.ibb.co/64k8D1c/good-5.png',
-            text: '9'
+            text: '9',
+                        type:'red'
+
 
         },  {
             image: 'https://i.ibb.co/64k8D1c/good-5.png',
-            text: '10'
+            text: '10',
+                        type:'black'
+
 
         },  {
             image: 'https://i.ibb.co/64k8D1c/good-5.png',
-            text: '11'
+            text: '11',
+                        type:'red'
+
 
         },  {
             image: 'https://i.ibb.co/64k8D1c/good-5.png',
-            text: '12'
+            text: '12',
+                        type:'black'
+
 
         },  {
             image: 'https://i.ibb.co/64k8D1c/good-5.png',
-            text: '13'
+            text: '13',
+                        type:'red'
+
 
         },  {
             image: 'https://i.ibb.co/64k8D1c/good-5.png',
-            text: '14'
+            text: '14',
+                        type:'black'
+
 
         },
 
@@ -113,6 +141,8 @@ const RouletteItem = () => {
     const [start, setStart] = useState(false);
     const [spinning, setSpinning] = useState(false);
     const [prizeIndex, setPrizeIndex] = useState(0);
+    //TODO type will prize item
+    const [lastWinElem, setLastWinElem] = useState<any>();
 
 
     useEffect(() => {
@@ -137,9 +167,7 @@ const RouletteItem = () => {
             const newPrizeIndex = await API.getPrizeIndex();
             setPrizeIndex(newPrizeIndex);
             setStart(false);
-
-            const { id } = prizeList[newPrizeIndex];
-            console.log(`Must win id - ${id}`)
+setLastWinElem(prizeList[newPrizeIndex])
         };
 
         prepare();
@@ -166,6 +194,13 @@ const RouletteItem = () => {
                     options={{ withoutAnimation: true, stopInCenter: false,  }}
                 />
                 <button onClick={handleStart}>Start</button>
+                <div>
+                    <h3>выпавший элемент</h3>
+    {lastWinElem &&  lastWinElem.text && <div>
+        <p>Число: {lastWinElem.text}</p>
+        <p>Цвет: {lastWinElem.type}</p>
+</div>}
+                </div>
             </>
     );
 };
