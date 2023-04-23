@@ -8,6 +8,7 @@ import "../../styles/main.scss";
 import Bets from "./bets";
 import { betsInfo } from "../interfaces";
 import { prizes } from "../prizes";
+import Timer from "./timer";
 
 const winPrizeIndex = 0;
 
@@ -50,13 +51,6 @@ const RouletteItem = () => {
   });
   //TODO type will prize item
   const [lastWinElem, setLastWinElem] = useState<any>();
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      console.log("minut");
-    }, 60000);
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     setPrizeList(reproducedPrizeList);
@@ -108,7 +102,7 @@ const RouletteItem = () => {
         defaultDesignOptions={{ prizesWithText: true }}
         options={{ withoutAnimation: true, stopInCenter: false }}
       />
-      <button onClick={handleStart}>Start</button>
+      <Timer onStart={handleStart} spiningNow={spinning}/>
       <div>
         <h3>выпавший элемент</h3>
         {lastWinElem && lastWinElem.text && (
