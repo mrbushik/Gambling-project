@@ -43,3 +43,55 @@
   cursor: pointer;
   font-size: 1.2em;
 }
+
+.red {
+  background: #f80606;
+}
+.black {
+  background: #181818;
+}
+.green {
+  background: #23b820;
+}
+
+.bet-info__container {
+  background: #2f3334;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  p {
+    margin-left: 2%;
+  }
+}
+.bet-square {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.bet-btn {
+  color: #fff;
+  padding: 15px 0;
+  text-align: center;
+  cursor: pointer;
+}
+.bet-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.bet-item {
+  margin: 0 5%;
+  width: 25%;
+}
+.bet-count {
+  background-color: #9d9e9e;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px;
+
+  p {
+    margin: 0;
+  }
+}
+
+
