@@ -7,8 +7,10 @@ export interface betsInfo {
   black: number;
 }
 export interface prizesInterface {
+  id?: string;
   image: string;
   text: string;
-  type: string;
+  type: 'green' | 'red' | 'black';
   winMultiplier: number;
 }
+

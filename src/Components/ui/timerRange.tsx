@@ -1,7 +1,7 @@
 import React, { useState, useEffect, CSSProperties } from "react";
 const TimerRange = () => {
   let intervalId: any;
-  const [remainingTime, setRemainingTime] = useState(45);
+  const [remainingTime, setRemainingTime] = useState(30);
   const [progress, setProgress] = useState(100);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const TimerRange = () => {
   }, [remainingTime]);
 
   useEffect(() => {
-    setProgress((remainingTime / 45) * 100);
+    setProgress((remainingTime / 30) * 100);
   }, [remainingTime]);
 
   const progressBarStyle: CSSProperties = {

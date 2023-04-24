@@ -6,9 +6,10 @@ import getRandomIntInRange from "../common/utils/getRandomIntInRange";
 import "../../styles/roulette.scss";
 import "../../styles/main.scss";
 import Bets from "./bets";
-import { betsInfo } from "../interfaces";
+import { betsInfo, prizesInterface } from "../interfaces";
 import { prizes } from "../prizes";
 import Timer from "./timer";
+import Balance from "./balance";
 
 //TODO rewrite this
 const reproducedPrizeList = [
@@ -22,8 +23,8 @@ const reproducedPrizeList = [
 
 const reproducedPrizeListWithId = reproducedPrizeList.map((item) => {
   return {
-    id: `${Date.now().toString(36)}-${Math.random().toString(36).substring(2)}`, // уникальный идентификатор
-    ...item, // копируем все свойства из текущего объекта
+    id: `${Date.now().toString(36)}-${Math.random().toString(36).substring(2)}`,
+    ...item,
   };
 });
 
@@ -36,18 +37,21 @@ const API = {
 };
 
 const RouletteItem = () => {
+  const defaultBetsInfo: betsInfo = {
+    red: 0,
+    green: 0,
+    black: 0,
+  };
+
   //TODO prize object type
   const [prizeList, setPrizeList] = useState<any>([]);
   const [start, setStart] = useState(false);
   const [spinning, setSpinning] = useState(false);
   const [prizeIndex, setPrizeIndex] = useState(0);
-  const [betInfo, setBetInfo] = useState<betsInfo>({
-    red: 0,
-    green: 0,
-    black: 0,
-  });
+  const [balance, setBalance] = useState(10);
+  const [lastWinElem, setLastWinElem] = useState<prizesInterface>();
+  const [betInfo, setBetInfo] = useState<betsInfo>(defaultBetsInfo);
   //TODO type will prize item
-  const [lastWinElem, setLastWinElem] = useState<any>();
 
   useEffect(() => {
     setPrizeList(reproducedPrizeListWithId);
@@ -81,15 +85,29 @@ const RouletteItem = () => {
   const handlePrizeDefined = () => {
     console.log("🥳 Prize defined! 🥳");
     setSpinning(false);
+    handleBalanceCalculation();
+    setBetInfo(defaultBetsInfo);
   };
-  const handleBet = (color: string, value: number) => {
+
+  const handleBalanceCalculation = () => {
+    if (lastWinElem) {
+      const sumWin = (betInfo[lastWinElem.type] =
+        lastWinElem.winMultiplier * betInfo[lastWinElem.type]);
+      setBalance((prevState) => prevState + sumWin);
+    }
+  };
+
+  const handleBet = (color: string, value: number, currentBet: number) => {
     if (color === "red" && betInfo.black) return;
     if (color === "black" && betInfo.red) return;
+    if (balance - currentBet < 0 || spinning) return;
     setBetInfo((prevState) => ({ ...prevState, [color]: value }));
+    setBalance((perv) => perv - currentBet);
   };
 
   return (
     <>
+      <Balance balance={balance} />
       <RoulettePro
         prizes={prizeList}
         prizeIndex={prizeIndex}

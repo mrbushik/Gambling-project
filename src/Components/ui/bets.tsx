@@ -3,7 +3,7 @@ import { betsInfo } from "../interfaces";
 
 interface BalanceInterface {
   betsInfo: betsInfo;
-  onBet(color: string, value: number): void;
+  onBet(color: string, value: number, currentBet: number): void;
 }
 
 const Bets: React.FC<BalanceInterface> = ({ betsInfo, onBet }) => {
@@ -18,8 +18,7 @@ const Bets: React.FC<BalanceInterface> = ({ betsInfo, onBet }) => {
   const handleDoBet = (lastValue: number, color: string) => {
     const betNumberValue: number = Number(betCount);
     if (betNumberValue <= 0) return;
-    onBet(color, lastValue + betNumberValue);
-    setBetCount("0");
+    onBet(color, lastValue + betNumberValue, Number(betCount));
   };
 
   function isAN(value: any) {
@@ -29,7 +28,7 @@ const Bets: React.FC<BalanceInterface> = ({ betsInfo, onBet }) => {
   }
   return (
     <>
-      <div className={'bets-input__wrapper'}>
+      <div className={"bets-input__wrapper"}>
         <input value={betCount} onChange={handleChange} />
       </div>
       <div className="bet-wrapper">
