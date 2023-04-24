@@ -1,3 +1,5 @@
+import { title } from "process";
+
 export interface rouletteItem {
   style: string;
 }
@@ -10,7 +12,12 @@ export interface prizesInterface {
   id?: string;
   image: string;
   text: string;
-  type: 'green' | 'red' | 'black';
+  type: "green" | "red" | "black";
   winMultiplier: number;
 }
 
+export interface increaseValuesInterface {
+  title: string;
+  value: number;
+  operationType?: string;
+}

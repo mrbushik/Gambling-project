@@ -48,7 +48,7 @@ const RouletteItem = () => {
   const [start, setStart] = useState(false);
   const [spinning, setSpinning] = useState(false);
   const [prizeIndex, setPrizeIndex] = useState(0);
-  const [balance, setBalance] = useState(10);
+  const [balance, setBalance] = useState(1000);
   const [lastWinElem, setLastWinElem] = useState<prizesInterface>();
   const [betInfo, setBetInfo] = useState<betsInfo>(defaultBetsInfo);
   //TODO type will prize item
@@ -126,7 +126,7 @@ const RouletteItem = () => {
             <p>Цвет: {lastWinElem.type}</p>
           </div>
         )}
-        <Bets betsInfo={betInfo} onBet={handleBet} />
+        <Bets betsInfo={betInfo} onBet={handleBet} balance={balance} />
       </div>
     </>
   );

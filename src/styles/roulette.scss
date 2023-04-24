@@ -55,7 +55,7 @@
 }
 
 .bet-info__container {
-  background: #2f3334;
+  background: #1a1e23;
   color: #fff;
   display: flex;
   justify-content: center;
@@ -84,14 +84,12 @@
   width: 25%;
 }
 .bet-count {
-  background-color: #9d9e9e;
   display: flex;
   justify-content: flex-end;
-  padding: 0 20px;
+  padding: 10px 20px;
+  background: #31353d;
 
   p {
     margin: 0;
   }
 }
-
-

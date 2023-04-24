@@ -1,18 +1,31 @@
 import React, { useState } from "react";
-import { betsInfo } from "../interfaces";
+import { betsInfo, increaseValuesInterface } from "../interfaces";
 
 interface BalanceInterface {
   betsInfo: betsInfo;
   onBet(color: string, value: number, currentBet: number): void;
+  balance: number;
 }
 
-const Bets: React.FC<BalanceInterface> = ({ betsInfo, onBet }) => {
+const Bets: React.FC<BalanceInterface> = ({ betsInfo, onBet, balance }) => {
   const { red, green, black }: any = betsInfo;
-  const [betCount, setBetCount] = useState("0");
+  const [betCount, setBetCount] = useState<number>(0);
+  const increaseValues: increaseValuesInterface[] = [
+    { value: 1, title: "+1", operationType: "+" },
+    { value: 10, title: "+10", operationType: "+" },
+    { value: 100, title: "+100", operationType: "+" },
+    { value: 0.5, title: "1/2", operationType: "*" },
+    { value: 2, title: "X2", operationType: "*" },
+    { value: balance, title: "MAX" },
+  ];
 
   const handleChange = ({ target }: any) => {
-    if (!isAN(Number(target.value))) return;
-    setBetCount(target.value);
+    // console.log(!isAN(Number(target.value)));
+    // if (!isAN(Number(target.value))) return;
+    // };
+    if (/^\d*\.?\d*$/.test(target.value)) {
+      setBetCount(target.value);
+    }
   };
 
   const handleDoBet = (lastValue: number, color: string) => {
@@ -22,14 +35,39 @@ const Bets: React.FC<BalanceInterface> = ({ betsInfo, onBet }) => {
   };
 
   function isAN(value: any) {
-    if (value instanceof Number) value = value.valueOf(); // Если это объект числа, то берём значение, которое и будет числом
+    if (value instanceof Number) value = value.valueOf();
 
     return isFinite(value) && value === parseInt(value, 10);
   }
+
+  const handleIncreaseBet = (item: increaseValuesInterface) => {
+    if (item.operationType === "+") {
+      setBetCount((perv) => +perv + item.value);
+    } else if (item.operationType === "*") {
+      setBetCount((perv) => Math.round(perv * item.value * 100) / 100);
+    } else {
+      setBetCount(balance);
+    }
+  };
+
   return (
     <>
       <div className={"bets-input__wrapper"}>
-        <input value={betCount} onChange={handleChange} />
+        <div>
+          <input
+            value={betCount === 0 ? "" : betCount}
+            onChange={handleChange}
+            placeholder="Input your bet"
+          />
+        </div>
+        <div className='bets-group-btn'>
+          <div className='bets-clear__btn' onClick={() => setBetCount(0)}>CLEAR</div>
+          {increaseValues.map((item, index) => (
+            <div className='bets-counts__btn'  key={index} onClick={() => handleIncreaseBet(item)}>
+              {item.title}
+            </div>
+          ))}
+        </div>
       </div>
       <div className="bet-wrapper">
         <div className="bet-item">
