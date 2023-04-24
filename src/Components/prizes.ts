@@ -2,6 +2,7 @@ import {prizesInterface} from "./interfaces";
 
 export const prizes: prizesInterface[] = [
     {
+
         image:
             "https://res.cloudinary.com/drfjcq9hg/image/upload/v1682154115/bushik123/oie_oie_canvas_3_drsmnw.png",
         text: "0",

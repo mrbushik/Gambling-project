@@ -10,13 +10,6 @@ import { betsInfo } from "../interfaces";
 import { prizes } from "../prizes";
 import Timer from "./timer";
 
-const winPrizeIndex = 0;
-
-const reproductionArray = (array: any = [], length = 0) => [
-  ...Array(length)
-    .fill("_")
-    .map(() => array[Math.floor(Math.random() * array.length)]),
-];
 //TODO rewrite this
 const reproducedPrizeList = [
   ...prizes,
@@ -27,8 +20,12 @@ const reproducedPrizeList = [
   ...prizes,
 ];
 
-const generateId = () =>
-  `${Date.now().toString(36)}-${Math.random().toString(36).substring(2)}`;
+const reproducedPrizeListWithId = reproducedPrizeList.map((item) => {
+  return {
+    id: `${Date.now().toString(36)}-${Math.random().toString(36).substring(2)}`, // уникальный идентификатор
+    ...item, // копируем все свойства из текущего объекта
+  };
+});
 
 const API = {
   getPrizeIndex: async () => {
@@ -53,7 +50,7 @@ const RouletteItem = () => {
   const [lastWinElem, setLastWinElem] = useState<any>();
 
   useEffect(() => {
-    setPrizeList(reproducedPrizeList);
+    setPrizeList(reproducedPrizeListWithId);
   }, []);
 
   useEffect(() => {
@@ -102,7 +99,7 @@ const RouletteItem = () => {
         defaultDesignOptions={{ prizesWithText: true }}
         options={{ withoutAnimation: true, stopInCenter: false }}
       />
-      <Timer onStart={handleStart} spiningNow={spinning}/>
+      <Timer onStart={handleStart} spiningNow={spinning} />
       <div>
         <h3>выпавший элемент</h3>
         {lastWinElem && lastWinElem.text && (

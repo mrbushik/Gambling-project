@@ -7,12 +7,10 @@ interface timerProps {
 }
 
 const Timer: React.FC<timerProps> = ({ onStart, spiningNow }) => {
-  const [showRange, setShowRange] = useState(true);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       onStart();
-      setShowRange(false);
     }, 53200);
     return () => clearInterval(intervalId);
   }, []);
