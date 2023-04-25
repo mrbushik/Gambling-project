@@ -121,14 +121,7 @@ const RouletteItem = () => {
       />
       <Timer onStart={handleStart} spiningNow={spinning} />
       <div>
-        <RouletteHistory droppedElement={lastWinElem}/>
-        <h3>выпавший элемент</h3>
-        {lastWinElem && lastWinElem.text && (
-          <div>
-            <p>Число: {lastWinElem.text}</p>
-            <p>Цвет: {lastWinElem.type}</p>
-          </div>
-        )}
+        <RouletteHistory droppedElement={lastWinElem} spinningNow={spinning} />
         <Bets betsInfo={betInfo} onBet={handleBet} balance={balance} />
       </div>
     </>
