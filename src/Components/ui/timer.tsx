@@ -10,7 +10,7 @@ const Timer: React.FC<timerProps> = ({ onStart, spiningNow }) => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       onStart();
-    }, 38200);
+    }, 18200);
     return () => clearInterval(intervalId);
   }, []);
 

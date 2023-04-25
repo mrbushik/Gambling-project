@@ -10,6 +10,8 @@ import { betsInfo, prizesInterface } from "../interfaces";
 import { prizes } from "../prizes";
 import Timer from "./timer";
 import Balance from "./balance";
+import { log } from "util";
+import RouletteHistory from "./rouletteHistory";
 
 //TODO rewrite this
 const reproducedPrizeList = [
@@ -119,6 +121,7 @@ const RouletteItem = () => {
       />
       <Timer onStart={handleStart} spiningNow={spinning} />
       <div>
+        <RouletteHistory droppedElement={lastWinElem}/>
         <h3>выпавший элемент</h3>
         {lastWinElem && lastWinElem.text && (
           <div>

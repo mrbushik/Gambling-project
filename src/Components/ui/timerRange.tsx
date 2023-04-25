@@ -1,7 +1,7 @@
 import React, { useState, useEffect, CSSProperties } from "react";
 const TimerRange = () => {
   let intervalId: any;
-  const [remainingTime, setRemainingTime] = useState(30);
+  const [remainingTime, setRemainingTime] = useState(11);
   const [progress, setProgress] = useState(100);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const TimerRange = () => {
   }, [remainingTime]);
 
   useEffect(() => {
-    setProgress((remainingTime / 30) * 100);
+    setProgress((remainingTime / 11) * 100);
   }, [remainingTime]);
 
   const progressBarStyle: CSSProperties = {
@@ -39,19 +39,23 @@ const TimerRange = () => {
   };
 
   return (
-     <>
-       {progress <=0 ? <h3>Loading ...</h3> :  <div>
-         <div style={progressBarStyle}>
-           <div style={progressFillStyle} />
-         </div>
-         <div style={{ marginTop: "10px" }}>
-           {Math.floor(remainingTime / 60)}:
-           {remainingTime % 60 < 10
-               ? `0${remainingTime % 60}`
-               : remainingTime % 60}
-         </div>
-       </div>}
-     </>
+    <>
+      {progress <= 0 ? (
+        <h3>Loading ...</h3>
+      ) : (
+        <div>
+          <div style={progressBarStyle}>
+            <div style={progressFillStyle} />
+          </div>
+          <div style={{ marginTop: "10px" }}>
+            {Math.floor(remainingTime / 60)}:
+            {remainingTime % 60 < 10
+              ? `0${remainingTime % 60}`
+              : remainingTime % 60}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
