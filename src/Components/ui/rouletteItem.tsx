@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 import RoulettePro from "react-roulette-pro";
 import "react-roulette-pro/dist/index.css";
@@ -10,7 +10,6 @@ import { betsInfo, prizesInterface } from "../interfaces";
 import { prizes } from "../prizes";
 import Timer from "./timer";
 import Balance from "./balance";
-import { log } from "util";
 import RouletteHistory from "./rouletteHistory";
 
 //TODO rewrite this
@@ -48,9 +47,9 @@ const RouletteItem = () => {
   //TODO prize object type
   const [prizeList, setPrizeList] = useState<any>([]);
   const [start, setStart] = useState(false);
-  const [spinning, setSpinning] = useState(false);
-  const [prizeIndex, setPrizeIndex] = useState(0);
-  const [balance, setBalance] = useState(1000);
+  const [spinning, setSpinning] = useState<boolean>(false);
+  const [prizeIndex, setPrizeIndex] = useState<number>(0);
+  const [balance, setBalance] = useState<number>(1000);
   const [lastWinElem, setLastWinElem] = useState<prizesInterface>();
   const [betInfo, setBetInfo] = useState<betsInfo>(defaultBetsInfo);
   //TODO type will prize item

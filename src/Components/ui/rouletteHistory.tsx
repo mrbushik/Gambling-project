@@ -3,31 +3,35 @@ import { prizesInterface } from "../interfaces";
 
 interface rouletteHistoryProps {
   droppedElement: prizesInterface | undefined;
-  spinningNow: boolean
+  spinningNow: boolean;
 }
 
 const RouletteHistory: React.FC<rouletteHistoryProps> = ({
-  droppedElement,spinningNow
+  droppedElement,
+  spinningNow,
 }) => {
   const [lastElems, setLastElems] = useState<any[]>();
 
   useEffect(() => {
-    if(!spinningNow){
-        if (droppedElement && !lastElems)setLastElems([droppedElement]);
-        if (lastElems) {
-            const targetArray = [...lastElems, droppedElement].reverse().splice(0,10);
-            setLastElems(targetArray);
-        }
+    if (!spinningNow) {
+      if (droppedElement && !lastElems) setLastElems([droppedElement]);
+      if (lastElems) {
+        const targetArray = [droppedElement, ...lastElems]
+          .splice(0, 10);
+        setLastElems(targetArray);
+      }
     }
   }, [droppedElement, spinningNow]);
 
   return (
     <div>
       <h4>Last dropper items</h4>
-      <div className='roulette-history__wrapper'>
-          {lastElems?.map((item: prizesInterface, index) => (
-              <div className={`bet-square history-item ${item.type}`}></div>
-          ))}
+      <div className="roulette-history__wrapper">
+        {lastElems?.map((item: prizesInterface, index) => (
+          <div key={index} className={`bet-square history-item ${item.type}`}>
+            {item.text}
+          </div>
+        ))}
       </div>
     </div>
   );
