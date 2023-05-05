@@ -20,9 +20,7 @@ const Bets: React.FC<BalanceInterface> = ({ betsInfo, onBet, balance }) => {
   ];
 
   const handleChange = ({ target }: any) => {
-    // console.log(!isAN(Number(target.value)));
-    // if (!isAN(Number(target.value))) return;
-    // };
+
     if (/^\d*\.?\d*$/.test(target.value)) {
       setBetCount(target.value);
     }
@@ -60,10 +58,16 @@ const Bets: React.FC<BalanceInterface> = ({ betsInfo, onBet, balance }) => {
             placeholder="Input your bet"
           />
         </div>
-        <div className='bets-group-btn'>
-          <div className='bets-clear__btn' onClick={() => setBetCount(0)}>CLEAR</div>
+        <div className="bets-group-btn">
+          <div className="bets-clear__btn" onClick={() => setBetCount(0)}>
+            CLEAR
+          </div>
           {increaseValues.map((item, index) => (
-            <div className='bets-counts__btn'  key={index} onClick={() => handleIncreaseBet(item)}>
+            <div
+              className="bets-counts__btn"
+              key={index}
+              onClick={() => handleIncreaseBet(item)}
+            >
               {item.title}
             </div>
           ))}

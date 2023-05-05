@@ -64,3 +64,10 @@ body {
 .roulette-history__wrapper {
   display: flex;
 }
+
+.guess--wrapper {
+  display: flex;
+  p {
+    margin-left: 5%;
+  }
+}

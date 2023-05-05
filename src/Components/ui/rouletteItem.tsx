@@ -52,6 +52,7 @@ const RouletteItem = () => {
   const [balance, setBalance] = useState<number>(1000);
   const [lastWinElem, setLastWinElem] = useState<prizesInterface>();
   const [betInfo, setBetInfo] = useState<betsInfo>(defaultBetsInfo);
+  const [guessedInRow, setGuessedInRow] = useState(0);
   //TODO type will prize item
 
   useEffect(() => {
@@ -92,10 +93,18 @@ const RouletteItem = () => {
 
   const handleBalanceCalculation = () => {
     if (lastWinElem) {
-      const sumWin = (betInfo[lastWinElem.type] =
-        lastWinElem.winMultiplier * betInfo[lastWinElem.type]);
+      const sumWin = lastWinElem.winMultiplier * betInfo[lastWinElem.type];
       setBalance((prevState) => prevState + sumWin);
+      handleGuessedTimes(sumWin);
     }
+  };
+
+  const handleGuessedTimes = (sumWin: number) => {
+    if (guessedInRow === 9 && sumWin >= 2) {
+      setBalance((prevState) => prevState + 50);
+      setGuessedInRow(0);
+    }
+    sumWin >= 2 ? setGuessedInRow((perv) => perv + 1) : setGuessedInRow(0);
   };
 
   const handleBet = (color: string, value: number, currentBet: number) => {
@@ -120,7 +129,11 @@ const RouletteItem = () => {
       />
       <Timer onStart={handleStart} spiningNow={spinning} />
       <div>
-        <RouletteHistory droppedElement={lastWinElem} spinningNow={spinning} />
+        <RouletteHistory
+          droppedElement={lastWinElem}
+          spinningNow={spinning}
+          guessedCount={guessedInRow}
+        />
         <Bets betsInfo={betInfo} onBet={handleBet} balance={balance} />
       </div>
     </>

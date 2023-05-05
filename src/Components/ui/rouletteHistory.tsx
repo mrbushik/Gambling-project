@@ -4,11 +4,13 @@ import { prizesInterface } from "../interfaces";
 interface rouletteHistoryProps {
   droppedElement: prizesInterface | undefined;
   spinningNow: boolean;
+  guessedCount: number;
 }
 
 const RouletteHistory: React.FC<rouletteHistoryProps> = ({
   droppedElement,
   spinningNow,
+  guessedCount,
 }) => {
   const [lastElems, setLastElems] = useState<any[]>();
 
@@ -16,8 +18,7 @@ const RouletteHistory: React.FC<rouletteHistoryProps> = ({
     if (!spinningNow) {
       if (droppedElement && !lastElems) setLastElems([droppedElement]);
       if (lastElems) {
-        const targetArray = [droppedElement, ...lastElems]
-          .splice(0, 10);
+        const targetArray = [droppedElement, ...lastElems].splice(0, 10);
         setLastElems(targetArray);
       }
     }
@@ -32,6 +33,10 @@ const RouletteHistory: React.FC<rouletteHistoryProps> = ({
             {item.text}
           </div>
         ))}
+      </div>
+      <div className='guess--wrapper'>
+        <h3>Guess 10 times in a row and get 50$</h3>
+        <p>{guessedCount}/10</p>
       </div>
     </div>
   );
