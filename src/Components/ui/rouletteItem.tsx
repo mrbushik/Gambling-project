@@ -37,7 +37,7 @@ const API = {
   },
 };
 
-const RouletteItem = () => {
+const RouletteItem: React.FC = () => {
   const defaultBetsInfo: betsInfo = {
     red: 0,
     green: 0,
