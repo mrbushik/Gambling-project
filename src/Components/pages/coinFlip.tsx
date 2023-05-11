@@ -28,12 +28,12 @@ const CoinFlip: React.FC = () => {
       if (coinInfo.randomValue < 50000) {
         timer = setTimeout(function () {
           coin.style.animation = "spin-heads 3s forwards";
-        }, 100);
+        }, 0);
       } else {
         timer = setTimeout(function () {
           console.log("tails");
           coin.style.animation = "spin-tails 3s forwards";
-        }, 100);
+        }, 0);
       }
     }
     return () => clearTimeout(timer);
@@ -48,29 +48,25 @@ const CoinFlip: React.FC = () => {
       ...prevState,
       randomValue: Math.floor(Math.random() * 100000),
     }));
-  const handleRemoveStyle = () => coin.removeAttribute("style");
 
   return (
     <div>
       <div className="container">
         <div className="coin" id="coin">
           <div className="heads">
-            <img src="https://res.cloudinary.com/drfjcq9hg/image/upload/v1683753396/coin2_zicn4n.png" />
+            <img src="https://res.cloudinary.com/drfjcq9hg/image/upload/v1683794213/coin2_1_konofg.png" />
           </div>
           <div className="tails">
-            <img src="https://res.cloudinary.com/drfjcq9hg/image/upload/v1683753396/coin1_ldy6ou.png" />
+            <img src="https://res.cloudinary.com/drfjcq9hg/image/upload/v1683794213/coin1_1_ptb6fm.png" />
           </div>
         </div>
         <div className="stats">
-          <p id="heads-count">Heads: 0</p>
-          <p id="tails-count">Tails: 0</p>
+          <p className="heads-count">Heads: 0</p>
+          <p className="tails-count">Tails: 0</p>
         </div>
         <div className="buttons">
-          <div id="flip-button" onClick={handleCoinFlip}>
+          <div className="flip-button" onClick={handleCoinFlip}>
             Bet
-          </div>
-          <div id="reset-button" onClick={handleRemoveStyle}>
-            Reset
           </div>
         </div>
       </div>

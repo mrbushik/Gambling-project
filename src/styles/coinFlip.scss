@@ -14,7 +14,7 @@
   height: 150px;
   width: 150px;
   position: relative;
-  margin: 32px auto;
+  margin: 100px auto 0;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
 }
@@ -34,10 +34,6 @@
 }
 .tails {
   transform: rotateX(180deg);
-
-  img {
-    margin-top: -48px;
-  }
 }
 @keyframes spin-tails {
   0% {
@@ -67,16 +63,18 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
-#flip-button {
+.flip-button {
   background-color: #053469;
   color: #ffffff;
+  padding: 10px 30px;
+  border-radius: 5px;
 }
-#flip-button:disabled {
+.flip-button:disabled {
   background-color: #e1e0ee;
   border-color: #e1e0ee;
   color: #101020;
 }
-#reset-button {
+.reset-button {
   background-color: #674706;
   color: white;
 }
