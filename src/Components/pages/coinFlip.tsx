@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/coinFlip.scss";
+import CoinFlipBets from "../ui/coinFlipBets";
 
 interface coinInfoInterface {
   randomValue: number;
@@ -60,15 +61,11 @@ const CoinFlip: React.FC = () => {
             <img src="https://res.cloudinary.com/drfjcq9hg/image/upload/v1683794213/coin1_1_ptb6fm.png" />
           </div>
         </div>
-        <div className="stats">
-          <p className="heads-count">Heads: 0</p>
-          <p className="tails-count">Tails: 0</p>
-        </div>
-        <div className="buttons">
-          <div className="flip-button" onClick={handleCoinFlip}>
-            Bet
-          </div>
-        </div>
+        <CoinFlipBets onBet={handleCoinFlip} />
+        {/*<div className="stats">*/}
+        {/*  <p className="heads-count">Heads: 0</p>*/}
+        {/*  <p className="tails-count">Tails: 0</p>*/}
+        {/*</div>*/}
       </div>
     </div>
   );

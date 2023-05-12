@@ -78,3 +78,38 @@ button {
   background-color: #674706;
   color: white;
 }
+
+.flip__bets_container {
+  margin-top: 100px;
+}
+
+.flip__bets-btns {
+  display: flex;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+.flip__btn-head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 90px;
+  margin-right: 5%;
+  cursor: pointer;
+  background: #d3b85b;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.flip__btn-tail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  cursor: pointer;
+  height: 50px;
+  background: #c7c9ce;
+  color: #fff;
+  border-radius: 5px;
+}

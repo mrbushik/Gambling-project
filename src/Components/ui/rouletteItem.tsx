@@ -11,6 +11,7 @@ import { prizes } from "../prizes";
 import Timer from "./timer";
 import Balance from "./balance";
 import RouletteHistory from "./rouletteHistory";
+import RouletteBets from "./rouletteBets";
 
 //TODO rewrite this
 const reproducedPrizeList = [
@@ -134,7 +135,7 @@ const RouletteItem: React.FC = () => {
           spinningNow={spinning}
           guessedCount={guessedInRow}
         />
-        <Bets betsInfo={betInfo} onBet={handleBet} balance={balance} />
+        <RouletteBets betsInfo={betInfo} onBet={handleBet} balance={balance} />
       </div>
     </>
   );
