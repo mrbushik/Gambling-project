@@ -9,9 +9,14 @@ import Bets from "./bets";
 import { betsInfo, prizesInterface } from "../interfaces";
 import { prizes } from "../prizes";
 import Timer from "./timer";
-import Balance from "./balance";
+import Balance from "../Store/balance";
+import UserBalance from "./userBalance";
+
+// import UserBalance from "../Store/balance";
+
 import RouletteHistory from "./rouletteHistory";
 import RouletteBets from "./rouletteBets";
+import { observer } from "mobx-react-lite";
 
 //TODO rewrite this
 const reproducedPrizeList = [
@@ -38,7 +43,7 @@ const API = {
   },
 };
 
-const RouletteItem: React.FC = () => {
+const RouletteItem: React.FC = observer(() => {
   const defaultBetsInfo: betsInfo = {
     red: 0,
     green: 0,
@@ -97,12 +102,14 @@ const RouletteItem: React.FC = () => {
       const sumWin = lastWinElem.winMultiplier * betInfo[lastWinElem.type];
       setBalance((prevState) => prevState + sumWin);
       handleGuessedTimes(sumWin);
+      Balance.change(Balance.count + sumWin)
     }
   };
 
   const handleGuessedTimes = (sumWin: number) => {
     if (guessedInRow === 9 && sumWin >= 2) {
       setBalance((prevState) => prevState + 50);
+      Balance.change(Balance.count + 50)
       setGuessedInRow(0);
     }
     sumWin >= 2 ? setGuessedInRow((perv) => perv + 1) : setGuessedInRow(0);
@@ -114,11 +121,12 @@ const RouletteItem: React.FC = () => {
     if (balance - currentBet < 0 || spinning) return;
     setBetInfo((prevState) => ({ ...prevState, [color]: value }));
     setBalance((perv) => perv - currentBet);
+    Balance.change(Balance.count - currentBet)
   };
 
   return (
     <>
-      <Balance balance={balance} />
+      <UserBalance balance={balance} />
       <RoulettePro
         prizes={prizeList}
         prizeIndex={prizeIndex}
@@ -139,6 +147,6 @@ const RouletteItem: React.FC = () => {
       </div>
     </>
   );
-};
+});
 
 export default RouletteItem;

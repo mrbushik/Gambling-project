@@ -4,7 +4,7 @@ interface balanceProps {
   balance: number;
 }
 
-const Balance: React.FC<balanceProps> = ({ balance }) => {
+const UserBalance: React.FC<balanceProps> = ({ balance }) => {
   return (
     <div>
       <h1>Balance: {balance}$</h1>
@@ -12,4 +12,4 @@ const Balance: React.FC<balanceProps> = ({ balance }) => {
   );
 };
 
-export default Balance;
+export default UserBalance;

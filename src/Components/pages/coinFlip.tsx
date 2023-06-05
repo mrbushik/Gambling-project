@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/coinFlip.scss";
 import CoinFlipBets from "../ui/coinFlipBets";
-
+import Balance from "../Store/balance";
+import { observer } from "mobx-react-lite";
 interface coinInfoInterface {
   randomValue: number;
   heads: number;
   tails: number;
 }
-
-const CoinFlip: React.FC = () => {
+//TODO start MobX
+const CoinFlip: React.FC = observer(() => {
   let initialized: boolean = false;
   let coin: any;
 
@@ -50,8 +51,15 @@ const CoinFlip: React.FC = () => {
       randomValue: Math.floor(Math.random() * 100000),
     }));
 
+  const handleTest = () => {
+    Balance.change(Balance.count + 20 )
+  }
+
   return (
     <div>
+      <div>{"Count = " + Balance.count}</div>
+      <div onClick={handleTest}>-1</div>
+      <div onClick={() => Balance.increment()}>+</div>
       <div className="container">
         <div className="coin" id="coin">
           <div className="heads">
@@ -69,6 +77,5 @@ const CoinFlip: React.FC = () => {
       </div>
     </div>
   );
-};
-
+});
 export default CoinFlip;
