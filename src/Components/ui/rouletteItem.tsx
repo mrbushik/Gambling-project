@@ -102,14 +102,22 @@ const RouletteItem: React.FC = observer(() => {
       const sumWin = lastWinElem.winMultiplier * betInfo[lastWinElem.type];
       setBalance((prevState) => prevState + sumWin);
       handleGuessedTimes(sumWin);
-      Balance.change(Balance.count + sumWin)
+      console.log(
+        Balance.count +
+          " Balance and sumWin" +
+          sumWin +
+          " all summ => " +
+          Balance.count +
+          sumWin
+      );
+      Balance.change(Balance.count + sumWin);
     }
   };
 
   const handleGuessedTimes = (sumWin: number) => {
     if (guessedInRow === 9 && sumWin >= 2) {
       setBalance((prevState) => prevState + 50);
-      Balance.change(Balance.count + 50)
+      Balance.change(Balance.count + 50);
       setGuessedInRow(0);
     }
     sumWin >= 2 ? setGuessedInRow((perv) => perv + 1) : setGuessedInRow(0);
@@ -121,12 +129,12 @@ const RouletteItem: React.FC = observer(() => {
     if (balance - currentBet < 0 || spinning) return;
     setBetInfo((prevState) => ({ ...prevState, [color]: value }));
     setBalance((perv) => perv - currentBet);
-    Balance.change(Balance.count - currentBet)
+    Balance.change(Balance.count - currentBet);
   };
 
   return (
     <>
-      <UserBalance balance={balance} />
+      {/*<UserBalance balance={balance} />*/}
       <RoulettePro
         prizes={prizeList}
         prizeIndex={prizeIndex}

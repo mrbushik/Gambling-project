@@ -52,14 +52,11 @@ const CoinFlip: React.FC = observer(() => {
     }));
 
   const handleTest = () => {
-    Balance.change(Balance.count + 20 )
-  }
+    Balance.change(Balance.count + 20);
+  };
 
   return (
     <div>
-      <div>{"Count = " + Balance.count}</div>
-      <div onClick={handleTest}>-1</div>
-      <div onClick={() => Balance.increment()}>+</div>
       <div className="container">
         <div className="coin" id="coin">
           <div className="heads">

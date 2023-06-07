@@ -1,12 +1,13 @@
 import React from "react";
 import Balance from "../Store/balance";
 import { Link } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 
 import "../../styles/navBar.scss";
 
-const NavBar: React.FC = () => {
+const NavBar: React.FC = observer(() => {
   return (
-    <nav className='nav-bar'>
+    <nav className="nav-bar">
       <div className="container">
         <div className="nav-wrapper">
           <div className="nav-links-wrapper">
@@ -20,6 +21,6 @@ const NavBar: React.FC = () => {
       </div>
     </nav>
   );
-};
+});
 
 export default NavBar;
